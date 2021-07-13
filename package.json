@@ -1,0 +1,19 @@
+{
+  "name": "kifu-tracer",
+  "version": "1.0.0",
+  "description": "App to trace go game records",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lite-server": "lite-server",
+    "start": "concurrently \"npm run tsc:w\" \"npm run lite-server\" ",
+    "st": "npm runtsc:w &&  npm run lite-server"
+  },
+  "author": "Bartosz Kaminski",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^6.2.0",
+    "lite-server": "^2.6.1",
+    "typescript": "^4.2.4"
+  }
+}
