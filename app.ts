@@ -1,3 +1,31 @@
+// sgf operations to be moved to different file
+const sgfToArray = (sgf: string) => {
+    const positionsStart = sgf.indexOf(';B[') + 1
+    const lastBMove = sgf.lastIndexOf(';B[') + 1;
+    const lastWMove = sgf.lastIndexOf(';W[') + 1;
+    const positionsEnd = lastBMove > lastWMove ? lastBMove : lastWMove;
+    const onlyMoves = sgf.substring(positionsStart, positionsEnd).split(';')
+    const result = onlyMoves.map((i: string) => {
+        return lettersToNumbers(i.substr(2,2))
+    })
+    console.log(result);
+    return result;
+}
+
+const lettersToNumbers = (chars: string) => {
+    const charCodeALetterShift = 96;
+    const boardScaleMultiplier = 13
+    const xAxis = (chars.charCodeAt(0) - charCodeALetterShift)*boardScaleMultiplier;
+    const yAxis = (chars.charCodeAt(1) - charCodeALetterShift)*boardScaleMultiplier;
+    console.log(chars, chars.charCodeAt(0),chars.charCodeAt(1))
+    return [xAxis, yAxis];
+}
+
+const sgfData = `(;GM[1]FF[4]CA[UTF-8]SZ[19];B[aa];W[sa];B[ss];W[as];B[jj];W[sj];B[aj];W[ja];B[js])`;
+
+const movesArray = sgfToArray(sgfData)
+console.log('moves: ', movesArray)
+
 // case Function expects objects with numbers
 
 const input = {a: 1, b: 3}
@@ -8,7 +36,7 @@ const combinator = (someObj: {a: number, b: number}):number => {
 }
 
 // using type alias to set types
-type CombinatorImproved = {a: number, b: string}
+type CombinatorImproved = {a: number, b: number}
 
 const combinatorImproved = (someObj:CombinatorImproved): number | string => {
     return someObj.a + someObj.b
